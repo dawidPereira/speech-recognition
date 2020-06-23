@@ -7,11 +7,11 @@ export class RecognitionResult {
   public readonly Success;
 
 
-  public static Success(text) {
+  public static success(text) {
     return new RecognitionResult(text, true)
   }
 
-  public static Failure(text) {
+  public static failure(text) {
     return new RecognitionResult(text, false)
   }
 }
