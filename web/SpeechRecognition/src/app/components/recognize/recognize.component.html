@@ -1,3 +1,9 @@
 <p>{{message}}</p>
 <hr/>
 <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="recognize()" [disabled]="isRecognizing">Recognize</button>
+<ul>
+  <li *ngFor="let item of toDos; let i = index">
+    {{i}} | {{item?.Text}} | {{item?.Date}}
+  </li>
+</ul>
+

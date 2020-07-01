@@ -14,12 +14,16 @@ export class SpeechRecognizerService {
     return await this.recognize(this.recognizer);
   }
 
-  recognize(recognizer: SpeechRecognizer): Promise<RecognitionResult> {
+  public recognize(recognizer: SpeechRecognizer): Promise<RecognitionResult> {
     return new Promise((resolve, reject) => {
       recognizer.recognizeOnceAsync(
         (result) => resolve(RecognitionResult.success(result.text)),
         (err) => reject(RecognitionResult.failure(err))
       );
     });
+  }
+
+  public close(){
+    this.recognizer.close()
   }
 }

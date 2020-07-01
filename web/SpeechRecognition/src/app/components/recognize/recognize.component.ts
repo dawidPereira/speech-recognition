@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SpeechRecognizer } from 'microsoft-cognitiveservices-speech-sdk';
-import { SpeechConfigFactory } from '../../services/speech-config-factory.service';
+import {TodoItem} from "../../models/todo-item";
+import {ToDoFactory} from "../../services/to-do-factory";
 
 @Component({
   selector: 'app-recognize',
@@ -12,25 +12,23 @@ export class RecognizeComponent implements OnInit {
 
   public isRecognizing = false;
   public message = '... Please click the button and start saying :)';
+  public toDos = new Array<TodoItem>();
+  private toDoFactory : ToDoFactory;
 
-  constructor() {
+  constructor(toDoFactory :ToDoFactory) {
+    this.toDoFactory = toDoFactory;
   }
 
   ngOnInit(): void {
   }
 
-  recognize(): void {
+  public async recognize() : Promise<any>{
     this.isRecognizing = true;
-    const recognizer = new SpeechRecognizer(SpeechConfigFactory.config);
-    recognizer.recognizeOnceAsync(result => {
-      this.message = result.text;
-      this.isRecognizing = false;
-      recognizer.close();
-    }, (err) => {
-      this.message = err;
-      this.isRecognizing = false;
-      recognizer.close();
-    });
+    let todo = await this.toDoFactory.createToDoItem();
+    this.toDos.push(todo);
+    this.isRecognizing = false;
+    console.log(this.toDos)
+    return undefined;
   }
 
 }
