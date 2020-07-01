@@ -7,7 +7,7 @@ import {ToDoFactory} from "./services/to-do-factory";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements  OnInit{
-  title = 'SpeechRecognition';
+
   ngOnInit(): void {
   }
   constructor(private toDoFactory: ToDoFactory) {  }
