@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { SpeechRecognizerService} from "./services/speech-recognizer.service";
+import {ToDoFactory} from "./services/to-do-factory";
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,9 @@ export class AppComponent implements  OnInit{
   title = 'SpeechRecognition';
   ngOnInit(): void {
   }
+  constructor(private toDoFactory: ToDoFactory) {  }
 
-  constructor(private speechRecognizerService: SpeechRecognizerService) {
-  }
-
-  recognize(){
-    this.speechRecognizerService.recognizeOnceAsync();
+  async recognize(){
+    await this.toDoFactory.createToDoItem();
   }
 }

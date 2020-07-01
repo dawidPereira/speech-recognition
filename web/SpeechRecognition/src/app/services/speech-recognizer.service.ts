@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SpeechRecognizer} from "microsoft-cognitiveservices-speech-sdk";
 import {RecognitionResult} from "../models/recognition-result";
-import {SpeechConfigFactory} from "./speech-config-factory.service";
+import {SpeechConfigFactory} from "./speech-config-factory";
 
 @Injectable({
   providedIn: 'root'
@@ -10,21 +10,16 @@ import {SpeechConfigFactory} from "./speech-config-factory.service";
 export class SpeechRecognizerService {
   private readonly recognizer = new SpeechRecognizer(SpeechConfigFactory.config);
 
-  public recognizeOnceAsync() {
-    return this.recognize(this.recognizer)
+  public async recognizeAsync() : Promise<RecognitionResult> {
+    return await this.recognize(this.recognizer);
   }
 
-  private recognize(recognizer) {
-    return recognizer.recognizeOnceAsync(onSuccess, onFailure);
-
-    function onSuccess(result) {
-      recognizer.close();
-      return RecognitionResult.success(result.text);
-    }
-
-    function onFailure(err) {
-      recognizer.close();
-      return RecognitionResult.failure(err)
-    }
+  recognize(recognizer: SpeechRecognizer): Promise<RecognitionResult> {
+    return new Promise((resolve, reject) => {
+      recognizer.recognizeOnceAsync(
+        (result) => resolve(RecognitionResult.success(result.text)),
+        (err) => reject(RecognitionResult.failure(err))
+      );
+    });
   }
 }

@@ -1,10 +1,12 @@
 export class RecognitionResult {
 
-  constructor(text, success) {
+  constructor(text: string, success: boolean) {
+    this.Text = text;
+    this.Success = success;
   }
 
-  public readonly Text;
-  public readonly Success;
+  public readonly Text: string;
+  public readonly Success: boolean;
 
 
   public static success(text) {
