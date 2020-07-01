@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { SpeechRecognizerService} from "./services/speech-recognizer.service";
+import { Component, OnInit } from '@angular/core';
+import { SpeechRecognizerService} from './services/speech-recognizer.service';
 
 @Component({
   selector: 'app-root',
