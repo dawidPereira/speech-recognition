@@ -1,18 +1,24 @@
 <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="recognize()" [disabled]="isRecognizing">Add todo item</button>
 <hr/>
+<div class="btn-group btn-block" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-info" (click)="filterDays('today')">Today</button>
+    <button type="button" class="btn btn-info" (click)="filterDays('tommorow')">Tommorow</button>
+    <button type="button" class="btn btn-info" (click)="filterDays('all')">All</button>
+</div>
+<hr/>
 <table class="table">
-  <thead>
-  <tr>
-    <th>#</th>
-    <th>Task</th>
-    <th>Date</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let item of toDos; let i = index">
-    <td>{{i + 1}}</td>
-    <td>{{item.Text}}</td>
-    <td>{{item.Date | date }}</td>
-  </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Task</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of toDosFiltered; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{item.Text}}</td>
+            <td>{{item.Date | date }}</td>
+        </tr>
+    </tbody>
 </table>
