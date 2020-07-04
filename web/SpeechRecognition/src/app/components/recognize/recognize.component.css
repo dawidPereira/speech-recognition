@@ -1,3 +1,32 @@
 p {
     font-size: 2em;
 }
+
+.taskDone {
+    position: relative;
+    height: 19px;
+    width: 24px;
+}
+
+.taskDone::after {
+    content: '';
+    background-color: darkgreen;
+    border-radius: 3px;
+    display: inline-block;
+    position: absolute;
+    height: 15px;
+    width: 25px;
+}
+
+.taskDone::before {
+    content: 'DONE';
+    border-radius: 3px;
+    display: inline-block;
+    position: absolute;
+    height: 15px;
+    width: 25px;
+    font-size: 8px;
+    top: 5;
+    z-index: 1;
+    color: white;
+}
