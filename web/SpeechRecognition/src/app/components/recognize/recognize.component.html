@@ -12,6 +12,7 @@
             <th>#</th>
             <th>Task</th>
             <th>Date</th>
+            <th>Done</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,9 @@
             <td>{{i + 1}}</td>
             <td>{{item.Text}}</td>
             <td>{{item.Date | date }}</td>
+            <td>
+                <div class="taskDone" *ngIf="item.Date < todayDate"></div>
+            </td>
         </tr>
     </tbody>
 </table>

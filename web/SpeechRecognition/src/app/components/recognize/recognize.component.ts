@@ -13,6 +13,7 @@ export class RecognizeComponent implements OnInit {
   public isRecognizing = false;
   public toDos: TodoItem[] = [];
   public toDosFiltered: TodoItem[] = [];
+  public todayDate = new Date();
 
   constructor(private toDoFactory: ToDoFactory) {
   }
@@ -44,12 +45,11 @@ export class RecognizeComponent implements OnInit {
   }
 
   filterDays(days: String): void {
-    let todayDate = new Date();
-    let tommorow = new Date(todayDate.getTime() + 24 * 60 * 60 * 1000);
+    let tommorow = new Date(this.todayDate.getTime() + 24 * 60 * 60 * 1000);
 
     switch (days) {
       case 'today':
-        this.toDosFiltered = this.toDos.filter(x => x.Date.toLocaleDateString() == todayDate.toLocaleDateString());
+        this.toDosFiltered = this.toDos.filter(x => x.Date.toLocaleDateString() == this.todayDate.toLocaleDateString());
         break;
       
       case 'tommorow':
