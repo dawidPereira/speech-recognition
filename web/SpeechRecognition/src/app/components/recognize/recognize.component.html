@@ -1,9 +1,18 @@
-<p>{{message}}</p>
+<button class="btn btn-lg btn-primary btn-block" type="submit" (click)="recognize()" [disabled]="isRecognizing">Add todo item</button>
 <hr/>
-<button class="btn btn-lg btn-primary btn-block" type="submit" (click)="recognize()" [disabled]="isRecognizing">Recognize</button>
-<ul>
-  <li *ngFor="let item of toDos; let i = index">
-    {{i}} | {{item?.Text}} | {{item?.Date}}
-  </li>
-</ul>
-
+<table class="table">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Task</th>
+    <th>Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of toDos; let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{item.Text}}</td>
+    <td>{{item.Date | date }}</td>
+  </tr>
+  </tbody>
+</table>

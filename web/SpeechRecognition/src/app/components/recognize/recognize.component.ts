@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import {TodoItem} from "../../models/todo-item";
-import {ToDoFactory} from "../../services/to-do-factory";
+import { TodoItem } from '../../models/todo-item';
+import { ToDoFactory } from '../../services/to-do-factory';
 
 @Component({
   selector: 'app-recognize',
@@ -11,23 +11,31 @@ import {ToDoFactory} from "../../services/to-do-factory";
 export class RecognizeComponent implements OnInit {
 
   public isRecognizing = false;
-  public message = '... Please click the button and start saying :)';
-  public toDos = new Array<TodoItem>();
-  private toDoFactory : ToDoFactory;
+  public toDos: TodoItem[] = [];
 
-  constructor(toDoFactory :ToDoFactory) {
-    this.toDoFactory = toDoFactory;
+  constructor(private toDoFactory: ToDoFactory) {
   }
 
   ngOnInit(): void {
+    this.toDos = [
+      {
+        Date: new Date(),
+        Id: '133',
+        Text: 'Something'
+      },
+      {
+        Date: new Date(2019, 3, 4),
+        Text: 'Nothing special',
+        Id: '444'
+      }
+    ];
   }
 
-  public async recognize() : Promise<any>{
+  public async recognize(): Promise<any> {
     this.isRecognizing = true;
-    let todo = await this.toDoFactory.createToDoItem();
+    const todo = await this.toDoFactory.createToDoItem();
     this.toDos.push(todo);
     this.isRecognizing = false;
-    console.log(this.toDos)
     return undefined;
   }
 
