@@ -12,6 +12,7 @@ export class RecognizeComponent implements OnInit {
 
   public isRecognizing = false;
   public toDos: TodoItem[] = [];
+  public toDosFiltered: TodoItem[] = [];
 
   constructor(private toDoFactory: ToDoFactory) {
   }
@@ -29,6 +30,8 @@ export class RecognizeComponent implements OnInit {
         Id: '444'
       }
     ];
+
+    this.toDosFiltered = this.toDos;
   }
 
   public async recognize(): Promise<any> {
@@ -36,7 +39,30 @@ export class RecognizeComponent implements OnInit {
     const todo = await this.toDoFactory.createToDoItem();
     this.toDos.push(todo);
     this.isRecognizing = false;
+    this.filterDays('all');
     return undefined;
   }
+
+  filterDays(days: String): void {
+    let todayDate = new Date();
+    let tommorow = new Date(todayDate.getTime() + 24 * 60 * 60 * 1000);
+
+    switch (days) {
+      case 'today':
+        this.toDosFiltered = this.toDos.filter(x => x.Date.toLocaleDateString() == todayDate.toLocaleDateString());
+        break;
+      
+      case 'tommorow':
+        this.toDosFiltered = this.toDos.filter(x => x.Date.toLocaleDateString() == tommorow.toLocaleDateString());
+        break;
+
+      case 'all':
+        this.toDosFiltered = this.toDos;
+        break;
+    }
+  }
+
+
+  
 
 }
