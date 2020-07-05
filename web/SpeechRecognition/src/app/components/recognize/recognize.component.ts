@@ -23,12 +23,14 @@ export class RecognizeComponent implements OnInit {
       {
         Date: new Date(),
         Id: '133',
-        Text: 'Something'
+        Text: 'Something',
+        IsDone: false
       },
       {
         Date: new Date(2019, 3, 4),
         Text: 'Nothing special',
-        Id: '444'
+        Id: '444',
+        IsDone: true
       }
     ];
 
@@ -44,6 +46,10 @@ export class RecognizeComponent implements OnInit {
     return undefined;
   }
 
+  changeStatus(item: TodoItem){
+    item.IsDone = !item.IsDone;
+  }
+
   filterDays(days: String): void {
     let tommorow = new Date(this.todayDate.getTime() + 24 * 60 * 60 * 1000);
 
@@ -51,7 +57,7 @@ export class RecognizeComponent implements OnInit {
       case 'today':
         this.toDosFiltered = this.toDos.filter(x => x.Date.toLocaleDateString() == this.todayDate.toLocaleDateString());
         break;
-      
+
       case 'tommorow':
         this.toDosFiltered = this.toDos.filter(x => x.Date.toLocaleDateString() == tommorow.toLocaleDateString());
         break;
@@ -60,9 +66,10 @@ export class RecognizeComponent implements OnInit {
         this.toDosFiltered = this.toDos;
         break;
     }
+
   }
 
 
-  
+
 
 }

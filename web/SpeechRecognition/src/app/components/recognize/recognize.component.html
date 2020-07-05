@@ -16,12 +16,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of toDosFiltered; let i = index">
+        <tr *ngFor="let item of toDosFiltered; let i = index" (click)="changeStatus(item)">
             <td>{{i + 1}}</td>
             <td>{{item.Text}}</td>
             <td>{{item.Date | date }}</td>
             <td>
-                <div class="taskDone" *ngIf="item.Date < todayDate"></div>
+                <div class="taskDone" *ngIf="item.IsDone"></div>
             </td>
         </tr>
     </tbody>
