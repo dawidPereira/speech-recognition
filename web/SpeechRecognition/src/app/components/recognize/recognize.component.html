@@ -3,7 +3,6 @@
 <div class="btn-group btn-block" role="group" aria-label="Basic example">
     <button type="button" class="btn btn-info" (click)="filterDays('today')">Today</button>
     <button type="button" class="btn btn-info" (click)="filterDays('tommorow')">Tommorow</button>
-    <button type="button" class="btn btn-info" (click)="filterDays('someday')">Someday</button>
     <button type="button" class="btn btn-info" (click)="filterDays('all')">All</button>
 </div>
 <hr/>
@@ -17,12 +16,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of toDosFiltered; let i = index" (click)="changeStatus(item)">
+        <tr *ngFor="let item of toDosFiltered; let i = index">
             <td>{{i + 1}}</td>
             <td>{{item.Text}}</td>
             <td>{{item.Date | date }}</td>
             <td>
-                <div class="taskDone" *ngIf="item.IsDone"></div>
+                <span [ngClass]="badgeStyles" *ngIf="item.Date < todayDate" (click)="deleteTask(item)" (mouseover)="changeStyle($event)" (mouseout)="changeStyle($event)">{{ badgeText }}</span>
             </td>
         </tr>
     </tbody>
