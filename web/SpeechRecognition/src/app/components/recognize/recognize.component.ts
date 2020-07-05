@@ -14,6 +14,8 @@ export class RecognizeComponent implements OnInit {
   public toDos: TodoItem[] = [];
   public toDosFiltered: TodoItem[] = [];
   public todayDate = new Date();
+  public badgeStyles = 'badge badge-success';
+  public badgeText = 'DONE';
 
   constructor(private toDoFactory: ToDoFactory) {
   }
@@ -46,9 +48,25 @@ export class RecognizeComponent implements OnInit {
     return undefined;
   }
 
-  changeStatus(item: TodoItem){
+  changeStatus(item: TodoItem) {
     item.IsDone = !item.IsDone;
   }
+
+  changeStyle($event) {
+    if ($event.type == 'mouseover') {
+      this.badgeStyles = 'badge badge-danger';
+      this.badgeText = 'DELETE';
+    } else {
+      this.badgeStyles = 'badge badge-success';
+      this.badgeText = 'DONE';
+    }
+  }
+
+  deleteTask(task: any) {
+    let index = this.toDos.indexOf(task);
+    this.toDos = this.toDos.splice(index, 1);
+  }
+
 
   filterDays(days: String): void {
     let tommorow = new Date(this.todayDate.getTime() + 24 * 60 * 60 * 1000);
@@ -70,10 +88,5 @@ export class RecognizeComponent implements OnInit {
         this.toDosFiltered = this.toDos;
         break;
     }
-
   }
-
-
-
-
 }
