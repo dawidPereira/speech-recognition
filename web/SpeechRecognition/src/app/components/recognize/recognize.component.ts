@@ -62,6 +62,10 @@ export class RecognizeComponent implements OnInit {
         this.toDosFiltered = this.toDos.filter(x => x.Date.toLocaleDateString() == tommorow.toLocaleDateString());
         break;
 
+      case 'someday':
+        this.toDosFiltered = this.toDos.filter(x => x.Date === undefined);
+        break;
+
       case 'all':
         this.toDosFiltered = this.toDos;
         break;
